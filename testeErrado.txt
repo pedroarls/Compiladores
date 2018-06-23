@@ -1,0 +1,4 @@
+program
+    /*Programa com vários erros léxicos*/
+    integer : ração
+end

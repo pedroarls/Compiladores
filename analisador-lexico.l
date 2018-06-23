@@ -288,10 +288,6 @@ terminais   [(),;''""{}\[\]:]
 
                 }
 
-.*      {   
-            printf("Erro lexico\n");
-        }
-
 
 %%
 int main(void)
