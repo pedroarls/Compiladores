@@ -288,6 +288,10 @@ terminais   [(),;''""{}\[\]:]
 
                 }
 
+.       {
+            printf("Caractere nao reconhecido: %s\n",yytext);
+        }
+
 
 %%
 int main(void)
