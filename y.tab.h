@@ -157,7 +157,7 @@ union YYSTYPE
 #line 28 "bas.y" /* yacc.c:1909  */
 
 		int iValue;
-		char sIndex;
+		char* sIndex;
 
 
 #line 164 "y.tab.h" /* yacc.c:1909  */

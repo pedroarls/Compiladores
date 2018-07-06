@@ -2,7 +2,7 @@
 	#include <stdio.h>
 	#include <stdlib.h>
 	#include <string.h>
-	#include "tabela.h"
+	// #include "tabela.h"
 
 	int yydebug = 0; /* For Debugging */
 
@@ -19,15 +19,15 @@
 
 
 
-	void install( char *sym_name, simbolo_t atribut ){
-		Instala(sym_name,atribut);
-	}
+	// void install( char *sym_name, simbolo_t atribut ){
+	// 	Instala(sym_name,atribut);
+	// }
 
 %}
 
 %union{
 		int iValue;
-		char sIndex;
+		char* sIndex;
 
 };
 
@@ -86,7 +86,9 @@
 %nonassoc ELSE
 
 %%
-partida: program
+partida: program {
+					printf("\nFuncionou no yacc: %d\n",yylval.iValue);
+				}
 	;
 
 program : PROGRAM M2 declaracoes M0 bloco
@@ -277,14 +279,14 @@ booleano : VERDADEIRO
 	 ;
 
 identificador : ID {
-printf("%s", yylval.nome);
+	printf("okokok");
 //install($1.nome,$1);
 }
 			;
 
 %%
 extern int contLinhas;
-
+extern YYSTYPE yylval;
 void yyerror(char *s) {
 	printf("\nFoi encontrado um erro proximo a linha: %d\n", contLinhas);
 }

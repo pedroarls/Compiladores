@@ -102,6 +102,8 @@ caractere   \'[A-Z]\'
 
 "program"   {
                 ECHO;
+                yylval.iValue = 16;
+                printf("\nFuncionou no lex: %d",yylval.iValue);
                 return (PROGRAM);
             }
 
@@ -239,6 +241,7 @@ caractere   \'[A-Z]\'
 
 {id}        {
                 ECHO;
+                // yylval.id = yytext;
                 return (ID);
             }
 
