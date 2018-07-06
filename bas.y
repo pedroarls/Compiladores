@@ -9,7 +9,7 @@
 	int yylex();
 	void yyerror(char *s);
 
-	int contErros;
+	int contErros, pTipo;
 
 	//int instala(char* nome){
 		//nome = YYSTYPE;
@@ -17,11 +17,22 @@
 		//tipo = bool, char, int ...
 	//}
 
+	void pegaTipo(char *sym_type){
+		if(strcmp(sym_type, "integer"))
+			pTipo = 0;
+		else if(strcmp(sym_type, "char"))
+			pTipo = 1;
+		else if(strcmp(sym_type, "boolean"))
+			pTipo = 2;
+		else
+			pTipo = 3;
+	}
+
 	void instala(char *sym_name ){
 		simbolo_t atributo;
 
 		strcpy(atributo.nome,sym_name);
-
+		atributo.tipo = pTipo;
 		Instala(sym_name,atributo);
 	}
 
@@ -88,7 +99,7 @@
 %nonassoc ELSE
 
 %%
-partida: program 
+partida: program
 	;
 
 program : PROGRAM M2 declaracoes M0 bloco
@@ -101,17 +112,17 @@ declaracoes : declaracoes M0 declaracao PONTOVIRGULA
 		| vazio
 		;
 
-declaracao : decl_de_var 
+declaracao : decl_de_var
 		 | def_de_tipo
 		 | decl_de_proc
 		 ;
 
-decl_de_var : tipo DOISPONTOS lista_de_ids { }
+decl_de_var : tipo { } DOISPONTOS lista_de_ids { }
 		;
 
-tipo : INTEGER 
- | BOOLEAN
- | CHAR
+tipo : INTEGER {pTipo=1;}
+ | BOOLEAN {pTipo=2;}
+ | CHAR {pTipo=3;}
  | tipo_definido
  ;
 

@@ -1,5 +1,7 @@
 program
 	integer : weight, group, charge, distance;
+	char : varTeste;
+	boolean : varTesteB;
 begin
 	distance := 2300;
 	read weight;
