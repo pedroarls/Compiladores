@@ -1,302 +1,296 @@
 /*Para ler somente um arquivo de entrada*/
 %option noyywrap
 %{
-    /*definições de constantes manifestas*/
-    int LT=0, LE=1, EQ=2, NE=3, GT=4, GE=5,
-    IF=6, THEN=7, ELSE=8, ID=9, NUMBER=10, RELOP=11,
-    BEGN=12, BOOLEAN=13, CHAR=14, DO=15, END=16, FALSO=17, ENDIF=18, ENDWHILE=19, EXIT=20, INTEGER=21, PROCEDURE=22,
-    PROGRAM=23, REFERENCE=24, REPEAT=25, READ=26, RETURN=27, VERDADEIRO=28, TYPE=29, UNTIL=30,VALUE=31, WRITE=32, WHILE=33,
-    
-    TIPO = 34, BOOL=35, DEF_TIPO=36, CARACTERE=37, ATRIBUICAO=38, LIMITES=39,
+    #include "y.tab.h"
 
-    SUM=40, SUB=41, MULT=42, DIV=43, ARITOP=44,EXPO=45,BOOLOP=46,
-    AND=47, OR=48, NOT=49;
+    void yyerror(char *c);
+
+    int contLinhas=1;
+
+    /*definições de constantes manifestas*/
 %}
 
-delim       [ \t\n]
+delim       [ \t]
 ws          {delim}+
 comentario  "/*".*"*/"
 digit       [0-9]
 letter      [a-zA-Z]
 id          {letter}({letter}|{digit})*
-negative    "-"{digit}+
-positive    ("+")?{digit}+
-
-
-limites {positive}{ws}?":"{ws}?{positive}
-
+numero      {digit}+
 caractere   \'[A-Z]\'
-terminais   [(),;''""{}\[\]:]
 
 %%
 
-{ws}            {}
-{comentario}    {}
+{ws}            {ECHO;}
+{comentario}    {ECHO;}
 
 "begin"     {
-                printf("Foi encontrado uma BEGIN. LEXEMA: %s\n", yytext);
-                // return (BEGIN);
+                ECHO;
+                return (BGN);
             }
 
- 
+
 "boolean"   {
-                printf("Foi encontrado uma declaração de tipo boolean. LEXEMA: %s\n", yytext);
-                // yylval= BOOLEAN;
-                // return (TIPO);
+                ECHO;
+                return (BOOLEAN);
             }
 
 "char"      {
-                printf("Foi encontrado uma declaração de tipo char. LEXEMA: %s\n", yytext);
-                // yylval= CHAR;
-                // return (TIPO);
+                ECHO;
+                return (CHAR);
             }
 
 "do"        {
-                printf("Foi encontrado um DO. LEXEMA: %s\n", yytext);
-                // return (DO);  
+                ECHO;
+                 return (DO);
             }
 
 
 "if"        {
-                printf("Foi encontrado IF. LEXEMA: %s\n",yytext);
-                // return (IF);
+                ECHO;
+                return (IF);
             }
 
 "else"      {
-                printf("Foi encontrado ELSE. LEXEMA: %s\n", yytext);
-                // return (ELSE);
-    
+                ECHO;
+                return (ELSE);
+
             }
 
 "end"       {
-                printf("Foi encontrado um END. LEXEMA: %s\n",yytext);
-                // return (END);
+                ECHO;
+                return (END);
 
             }
 
 "endif"     {
-                printf("Foi encontrado um ENDIF. LEXEMA: %s\n",yytext);
-                // return (ENDIF);
+                ECHO;
+                return (ENDIF);
 
             }
 
 "endwhile"  {
-                 printf("Foi encontrado um ENDWHILE. LEXEMA: %s\n",yytext);
-                // return (ENDWHILE);   
+                 ECHO;
+                 return (ENDWHILE);
             }
 
 "exit"      {
-                 printf("Foi encontrado um EXIT. LEXEMA: %s\n",yytext);
-                // return (EXIT);
+                 ECHO;
+                 return (EXIT);
             }
 
 "false"     {
-                printf("Foi encontrado um boolean. LEXEMA: %s\n", yytext);
-                // yylval= FALSO;
-                // return (BOOL);
+                ECHO;
+                return (FALSO);
             }
 
 "integer"   {
-                printf("Foi encontrado uma declaração de tipo inteiro. LEXEMA: %s\n", yytext);
-                // yylval= INTEGER;
-                // return (TIPO);
+                ECHO;
+                return (INTEGER);
             }
 
 "not"       {
-                printf("Foi encontrado um operador not. LEXEMA: %s\n", yytext);
-                // yylval= NOT;
-                // return (BOOLOP);
+                ECHO;
+                return (NOT);
             }
 
 
 "procedure" {
-                 printf("Foi encontrado um PROCEDURE. LEXEMA: %s\n",yytext);
-                // return (PROCEDURE);
+                ECHO;
+                return (PROCEDURE);
             }
 
 "program"   {
-                 printf("Foi encontrado um PROGRAM. LEXEMA: %s\n",yytext);
-                // return (PROGRAM);
+                ECHO;
+                return (PROGRAM);
             }
 
 "reference" {
-                 printf("Foi encontrado um REFERENCE. LEXEMA: %s\n",yytext);
-                // return (REFERENCE);
+                ECHO;
+                return (REFERENCE);
             }
 
 "repeat"    {
-                 printf("Foi encontrado um REPEAT. LEXEMA: %s\n",yytext);
-                // return (REPEAT);
+                ECHO;
+                return (REPEAT);
             }
 
 "read"      {
-                 printf("Foi encontrado um READ. LEXEMA: %s\n",yytext);
-                // return (READ);
+                ECHO;
+                return (READ);
             }
 
 "return"    {
-                 printf("Foi encontrado um RETURN. LEXEMA: %s\n",yytext);
-                // return (RETURN);
+                ECHO;
+                return (RETURN);
             }
 
 "then"      {
-                printf("Foi encontrado THEN. LEXEMA: %s\n", yytext);
-                // return (THEN);
+                ECHO;
+                return (THEN);
             }
 
 "true"      {
-                printf("Foi encontrado um boolean. LEXEMA: %s\n", yytext);
-                // yylval= VERDADEIRO;
-                // return (BOOL);
-            } 
+                ECHO;
+                return (VERDADEIRO);
+            }
 
 
 "type"      {
-                printf("Foi encontrado um type. LEXEMA: %s\n", yytext);
-                // return (TYPE);
+                ECHO;
+                return (TYPE);
             }
 
 "until"     {
-                 printf("Foi encontrado um UNTIL. LEXEMA: %s\n",yytext);
-                // return (UNTIL);
+                 ECHO;
+                 return (UNTIL);
             }
 
 "value"     {
-                 printf("Foi encontrado um VALUE. LEXEMA: %s\n",yytext);
-                // return (VALUE);
+                 ECHO;
+              	 return (VALUE);
             }
 
 "write"     {
-                 printf("Foi encontrado um WRITE. LEXEMA: %s\n",yytext);
-                // return (WRITE);
+                 ECHO;
+                 return (WRITE);
             }
 
 "while"     {
-                 printf("Foi encontrado um WHILE. LEXEMA: %s\n",yytext);
-                // return (WHILE);
+                 ECHO;
+                 return (WHILE);
             }
 
 
 "<"         {
-                printf("Foi encontrado RELOP. LEXEMA: %s\n", yytext);
-                // return (LT);
+                 ECHO;
+                 return (LT);
 
             }
 
 ">"         {
-                printf("Foi encontrado RELOP. LEXEMA: %s\n", yytext);
-                // return (GT);
+                 ECHO;
+                 return (GT);
             }
 
 "<="        {
-                printf("Foi encontrado RELOP. LEXEMA: %s\n", yytext);
-                // return (LE);
+                 ECHO;
+                 return (LE);
 
             }
 
 ">="        {
-                printf("Foi encontrado RELOP. LEXEMA: %s\n", yytext);
-                // return (GE);
+                ECHO;
+                return (GE);
 
             }
 
 "="         {
-                printf("Foi encontrado RELOP. LEXEMA: %s\n", yytext);
-                // return (EQ);
+                ECHO;
+                return (EQ);
 
             }
 
 ":="         {
-                printf("Foi encontrada uma atribuicao. LEXEMA: %s\n", yytext);
-                // return (ATRIBUICAO);
+                ECHO;
+                return (ATRIBUICAO);
 
             }
 
 "not="      {
-                printf("Foi encontrado RELOP. LEXEMA: %s\n", yytext);
-                // return (NE);
+                ECHO;
+                return (NE);
             }
 
 "/"         {
-                printf("Foi encontrado um operador de divisao. LEXEMA: %s\n", yytext);
-                // yylval= DIV;
-                // return (ARITOP);
+                ECHO;
+                return (DIV);
             }
 
 "*"         {
-                printf("Foi encontrado um operador de multiplicacao. LEXEMA: %s\n", yytext);
-                // yylval= MULT;
-                // return (ARITOP);
+                ECHO;
+                return (MULT);
             }
 
 "+"         {
-                printf("Foi encontrado um operador de adicao. LEXEMA: %s\n", yytext);
-                // yylval= SUM;
-                // return (ARITOP);
+                ECHO;
+                return (SUM);
             }
 
 "-"         {
-                printf("Foi encontrado um operador de subtracao. LEXEMA: %s\n", yytext);
-                // yylval= SUB;
-                // return (ARITOP);
+                ECHO;
+                return (SUB);
             }
 
 "**"        {
-                printf("Foi encontrado um operador de exponenciacao. LEXEMA: %s\n", yytext);
-                // return (EXPO);
+                ECHO;
+                return (EXP);
             }
 
 "|"         {
-                printf("Foi encontrado um operador or. LEXEMA: %s\n", yytext);
-                // yylval= OR;
-                // return (BOOLOP);
+                ECHO;
+                return (OR);
             }
 
 "&"         {
-                printf("Foi encontrado um operador and. LEXEMA: %s\n", yytext);
-                // yylval= AND;
-                // return (BOOLOP);
+                ECHO;
+                return (AND);
             }
 
-{id}        {   
-                printf("Foi encontrado um identificador. LEXEMA: %s\n", yytext);
-                // return (ID);
+{id}        {
+                ECHO;
+                return (ID);
             }
 
-{negative}  {
-                printf("Foi encontrado um numero inteiro negativo.LEXEMA: %s\n",yytext);
+{numero}    {
+                ECHO;
+                return (NUMERO);
             }
-
-{positive}  {
-                printf("Foi encontrado um numero inteiro positivo. LEXEMA: %s\n",yytext);
-            }
-
 
 
 {caractere} {
-                 printf("Foi encontrado um caractere. LEXEMA: %s\n", yytext);
-                // return (NE);
+                 ECHO;
+                 return (CONST_CHAR);
 
             }
 
-{limites}       {
-                     printf("Foi encontrada uma definição de limites. LEXEMA: %s\n", yytext);
-                }
+[:]         {
+              ECHO;
+			         return DOISPONTOS;
+		        }
 
-{terminais}     {
-                    printf("Foi encontrado um terminal. LEXEMA: %s\n", yytext);
+[,]         {
+              ECHO;
+			        return VIRGULA;
+		        }
+[;]         {
+              ECHO;
+			        return PONTOVIRGULA;
+		        }
+[(]         {
+              ECHO;
+			        return APARENTESE;
+		        }
+[)]         {
+              ECHO;
+			        return FPARENTESE;
+		        }
 
-                }
+"\n"        {
+              ECHO;
+    			    contLinhas++;
+              printf("%d ", contLinhas);
+    		    }
 
-.       {
-            printf("Caractere nao reconhecido: %s\n",yytext);
-        }
+.           {
+              ECHO;
+            }
 
 
 %%
-int main(void)
-{
-    yylex();
-    return 0;
-}
 
+//int main(void)
+//{
+//    yylex();
+//    return 0;
+//}

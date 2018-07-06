@@ -9,4 +9,3 @@ begin
 	charge := 40 + 3 * (distance / 1000)
 	write charge
 end
-
