@@ -82,14 +82,16 @@
 		//tipo = bool, char, int ...
 	//}
 
+	void instala(char *sym_name ){
+		simbolo_t atributo;
+
+		strcpy(atributo.nome,sym_name);
+
+		Instala(sym_name,atributo);
+	}
 
 
-	// void install( char *sym_name, simbolo_t atribut ){
-	// 	Instala(sym_name,atribut);
-	// }
-
-
-#line 93 "y.tab.c" /* yacc.c:339  */
+#line 95 "y.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -233,13 +235,13 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 28 "bas.y" /* yacc.c:355  */
+#line 30 "bas.y" /* yacc.c:355  */
 
 		int iValue;
 		char* sIndex;
 
 
-#line 243 "y.tab.c" /* yacc.c:355  */
+#line 245 "y.tab.c" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -256,7 +258,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 260 "y.tab.c" /* yacc.c:358  */
+#line 262 "y.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -558,16 +560,16 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    89,    89,    92,    95,    98,    99,   102,   103,   104,
-     107,   110,   111,   112,   113,   116,   119,   122,   125,   128,
-     131,   134,   137,   140,   143,   146,   147,   150,   153,   154,
-     157,   158,   159,   160,   163,   166,   167,   170,   173,   174,
-     177,   178,   181,   184,   185,   188,   189,   190,   191,   192,
-     193,   194,   195,   196,   197,   200,   203,   206,   209,   210,
-     212,   215,   218,   221,   224,   227,   228,   231,   234,   235,
-     238,   239,   242,   245,   246,   247,   248,   249,   250,   251,
-     252,   253,   254,   255,   256,   257,   258,   259,   260,   261,
-     264,   265,   268,   269,   272,   275,   276,   279
+       0,    91,    91,    94,    97,   100,   101,   104,   105,   106,
+     109,   112,   113,   114,   115,   118,   121,   124,   127,   130,
+     133,   136,   139,   142,   145,   148,   149,   152,   155,   156,
+     159,   160,   161,   162,   165,   168,   169,   172,   175,   176,
+     179,   180,   183,   186,   187,   190,   191,   192,   193,   194,
+     195,   196,   197,   198,   199,   202,   205,   208,   211,   212,
+     214,   217,   220,   223,   226,   229,   230,   233,   236,   237,
+     240,   241,   244,   247,   248,   249,   250,   251,   252,   253,
+     254,   255,   256,   257,   258,   259,   260,   261,   262,   263,
+     266,   267,   270,   271,   274,   277,   278,   281
 };
 #endif
 
@@ -1496,13 +1498,19 @@ yyreduce:
   switch (yyn)
     {
         case 10:
-#line 107 "bas.y" /* yacc.c:1646  */
+#line 109 "bas.y" /* yacc.c:1646  */
     { }
-#line 1502 "y.tab.c" /* yacc.c:1646  */
+#line 1504 "y.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 97:
+#line 281 "bas.y" /* yacc.c:1646  */
+    {instala((yyvsp[0].sIndex));}
+#line 1510 "y.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1506 "y.tab.c" /* yacc.c:1646  */
+#line 1514 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1730,7 +1738,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 282 "bas.y" /* yacc.c:1906  */
+#line 284 "bas.y" /* yacc.c:1906  */
 
 extern int contLinhas;
 extern YYSTYPE yylval;
@@ -1740,6 +1748,8 @@ void yyerror(char *s) {
 }
 
 int main(void) {
+	iniciaListaNO();
+
 	printf("%d ",contLinhas);
   	int executou= yyparse();
 
@@ -1747,6 +1757,7 @@ int main(void) {
 		 printf("\nPrograma sintaticamente correto!\n");
 	}
 
+	printf("\n");
 	Imprime_Tabela();
 
   return 0;

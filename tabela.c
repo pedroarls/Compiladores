@@ -68,14 +68,15 @@ int Recupera_Entrada(char* X)
 {
 	int K;
 	K = L;
-
+	
 	while (K > escopo[nivel]) {
         K--;
-        if( !strcmp(X, tabela_simbolos[K].nome) ) {	// X ja pertence aa tabela
+        if( !strcmp(X, tabela_simbolos[K].nome) ) {	// X ja pertence a tabela
 			Erro(3);
 			return;
 		}
 	}
+
 	tabela_simbolos[L] = atribut;
 	L++;
 }

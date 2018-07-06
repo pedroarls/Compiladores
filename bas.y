@@ -17,11 +17,13 @@
 		//tipo = bool, char, int ...
 	//}
 
+	void instala(char *sym_name ){
+		simbolo_t atributo;
 
+		strcpy(atributo.nome,sym_name);
 
-	// void install( char *sym_name, simbolo_t atribut ){
-	// 	Instala(sym_name,atribut);
-	// }
+		Instala(sym_name,atributo);
+	}
 
 %}
 
@@ -99,7 +101,7 @@ declaracoes : declaracoes M0 declaracao PONTOVIRGULA
 		| vazio
 		;
 
-declaracao : decl_de_var
+declaracao : decl_de_var 
 		 | def_de_tipo
 		 | decl_de_proc
 		 ;
@@ -276,7 +278,7 @@ booleano : VERDADEIRO
 	 | FALSO
 	 ;
 
-identificador : ID
+identificador : ID{instala($1);}
 			;
 
 %%
@@ -288,6 +290,8 @@ void yyerror(char *s) {
 }
 
 int main(void) {
+	iniciaListaNO();
+
 	printf("%d ",contLinhas);
   	int executou= yyparse();
 
@@ -295,6 +299,7 @@ int main(void) {
 		 printf("\nPrograma sintaticamente correto!\n");
 	}
 
+	printf("\n");
 	Imprime_Tabela();
 
   return 0;

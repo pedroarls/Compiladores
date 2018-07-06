@@ -88,7 +88,6 @@ caractere   \'[A-Z]\'
 
 "integer"   {
                 ECHO;
-                yylval.iValue = atoi(yytext);
                 return (INTEGER);
             }
 
@@ -243,7 +242,6 @@ caractere   \'[A-Z]\'
 {id}        {
                 ECHO;
                 yylval.sIndex = yytext;
-                //strcpy(yylval.sIndex,yytext);
                 return (ID);
             }
 
