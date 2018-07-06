@@ -67,7 +67,7 @@
 	#include <stdio.h>
 	#include <stdlib.h>
 	#include <string.h>
-	// #include "tabela.h"
+	#include "tabela.h"
 
 	int yydebug = 0; /* For Debugging */
 
@@ -1495,16 +1495,14 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-        case 97:
-#line 279 "bas.y" /* yacc.c:1646  */
-    {
-	printf("\n%s",(yyvsp[0].sIndex));
-}
-#line 1504 "y.tab.c" /* yacc.c:1646  */
+        case 10:
+#line 107 "bas.y" /* yacc.c:1646  */
+    { }
+#line 1502 "y.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1508 "y.tab.c" /* yacc.c:1646  */
+#line 1506 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1732,7 +1730,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 284 "bas.y" /* yacc.c:1906  */
+#line 282 "bas.y" /* yacc.c:1906  */
 
 extern int contLinhas;
 extern YYSTYPE yylval;
@@ -1748,6 +1746,8 @@ int main(void) {
 	if(!executou){//É 0 se executou
 		 printf("\nPrograma sintaticamente correto!\n");
 	}
+
+	Imprime_Tabela();
 
   return 0;
 }

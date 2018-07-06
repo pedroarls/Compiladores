@@ -2,7 +2,7 @@
 	#include <stdio.h>
 	#include <stdlib.h>
 	#include <string.h>
-	// #include "tabela.h"
+	#include "tabela.h"
 
 	int yydebug = 0; /* For Debugging */
 
@@ -104,10 +104,10 @@ declaracao : decl_de_var
 		 | decl_de_proc
 		 ;
 
-decl_de_var : tipo DOISPONTOS lista_de_ids
+decl_de_var : tipo DOISPONTOS lista_de_ids { }
 		;
 
-tipo : INTEGER
+tipo : INTEGER 
  | BOOLEAN
  | CHAR
  | tipo_definido
@@ -294,6 +294,8 @@ int main(void) {
 	if(!executou){//É 0 se executou
 		 printf("\nPrograma sintaticamente correto!\n");
 	}
+
+	Imprime_Tabela();
 
   return 0;
 }

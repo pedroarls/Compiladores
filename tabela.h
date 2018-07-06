@@ -34,17 +34,17 @@ typedef struct simbolo_str
 {
 	char nome[MAX_NOME];
 	int tipo;
-	int valor_inteiro;
-	int nivel;
-	int width;	// quantidade de palavras para alocar a variavel
-	int offset;	// deslocamento
-	char valor_char;
-	int valor_boolean;
-	int local;
-	int constante;
-	int quad;
-	procedimento_t procedimento;
-	tipo_definido_t tipo_definido;
+	// int valor_inteiro;
+	// int nivel;
+	// int width;	// quantidade de palavras para alocar a variavel
+	// int offset;	// deslocamento
+	// char valor_char;
+	// int valor_boolean;
+	// int local;
+	// int constante;
+	// int quad;
+	// procedimento_t procedimento;
+	// tipo_definido_t tipo_definido;
 } simbolo_t;
 
 simbolo_t tabela_simbolos[TAB_SIZE];

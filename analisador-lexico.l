@@ -88,6 +88,7 @@ caractere   \'[A-Z]\'
 
 "integer"   {
                 ECHO;
+                yylval.iValue = atoi(yytext);
                 return (INTEGER);
             }
 
