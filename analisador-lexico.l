@@ -2,6 +2,8 @@
 %option noyywrap
 %{
     #include "y.tab.h"
+    #include <string.h>
+    #include <stdio.h>
 
     void yyerror(char *c);
 
@@ -102,8 +104,6 @@ caractere   \'[A-Z]\'
 
 "program"   {
                 ECHO;
-                yylval.iValue = 16;
-                printf("\nFuncionou no lex: %d",yylval.iValue);
                 return (PROGRAM);
             }
 
@@ -241,7 +241,8 @@ caractere   \'[A-Z]\'
 
 {id}        {
                 ECHO;
-                // yylval.id = yytext;
+                yylval.sIndex = yytext;
+                //strcpy(yylval.sIndex,yytext);
                 return (ID);
             }
 

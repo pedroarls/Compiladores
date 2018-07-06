@@ -560,13 +560,15 @@ char *yytext;
 /*Para ler somente um arquivo de entrada*/
 #line 4 "analisador-lexico.l"
     #include "y.tab.h"
+    #include <string.h>
+    #include <stdio.h>
 
     void yyerror(char *c);
 
     int contLinhas=1;
 
     /*definições de constantes manifestas*/
-#line 570 "lex.yy.c"
+#line 572 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -784,10 +786,10 @@ YY_DECL
 		}
 
 	{
-#line 22 "analisador-lexico.l"
+#line 24 "analisador-lexico.l"
 
 
-#line 791 "lex.yy.c"
+#line 793 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -846,17 +848,17 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 24 "analisador-lexico.l"
+#line 26 "analisador-lexico.l"
 {ECHO;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 25 "analisador-lexico.l"
+#line 27 "analisador-lexico.l"
 {ECHO;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 27 "analisador-lexico.l"
+#line 29 "analisador-lexico.l"
 {
                 ECHO;
                 return (BGN);
@@ -864,7 +866,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 33 "analisador-lexico.l"
+#line 35 "analisador-lexico.l"
 {
                 ECHO;
                 return (BOOLEAN);
@@ -872,7 +874,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 38 "analisador-lexico.l"
+#line 40 "analisador-lexico.l"
 {
                 ECHO;
                 return (CHAR);
@@ -880,7 +882,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 43 "analisador-lexico.l"
+#line 45 "analisador-lexico.l"
 {
                 ECHO;
                  return (DO);
@@ -888,7 +890,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 49 "analisador-lexico.l"
+#line 51 "analisador-lexico.l"
 {
                 ECHO;
                 return (IF);
@@ -896,7 +898,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 54 "analisador-lexico.l"
+#line 56 "analisador-lexico.l"
 {
                 ECHO;
                 return (ELSE);
@@ -905,7 +907,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 60 "analisador-lexico.l"
+#line 62 "analisador-lexico.l"
 {
                 ECHO;
                 return (END);
@@ -914,7 +916,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 66 "analisador-lexico.l"
+#line 68 "analisador-lexico.l"
 {
                 ECHO;
                 return (ENDIF);
@@ -923,7 +925,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 72 "analisador-lexico.l"
+#line 74 "analisador-lexico.l"
 {
                  ECHO;
                  return (ENDWHILE);
@@ -931,7 +933,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 77 "analisador-lexico.l"
+#line 79 "analisador-lexico.l"
 {
                  ECHO;
                  return (EXIT);
@@ -939,7 +941,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 82 "analisador-lexico.l"
+#line 84 "analisador-lexico.l"
 {
                 ECHO;
                 return (FALSO);
@@ -947,7 +949,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 87 "analisador-lexico.l"
+#line 89 "analisador-lexico.l"
 {
                 ECHO;
                 return (INTEGER);
@@ -955,7 +957,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 92 "analisador-lexico.l"
+#line 94 "analisador-lexico.l"
 {
                 ECHO;
                 return (NOT);
@@ -963,7 +965,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 98 "analisador-lexico.l"
+#line 100 "analisador-lexico.l"
 {
                 ECHO;
                 return (PROCEDURE);
@@ -971,11 +973,9 @@ YY_RULE_SETUP
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 103 "analisador-lexico.l"
+#line 105 "analisador-lexico.l"
 {
                 ECHO;
-                yylval.iValue = 16;
-                printf("\nFuncionou no lex: %d",yylval.iValue);
                 return (PROGRAM);
             }
 	YY_BREAK
@@ -1189,13 +1189,14 @@ YY_RULE_SETUP
 #line 242 "analisador-lexico.l"
 {
                 ECHO;
-                // yylval.id = yytext;
+                yylval.sIndex = yytext;
+                //strcpy(yylval.sIndex,yytext);
                 return (ID);
             }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 248 "analisador-lexico.l"
+#line 249 "analisador-lexico.l"
 {
                 ECHO;
                 return (NUMERO);
@@ -1203,7 +1204,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 254 "analisador-lexico.l"
+#line 255 "analisador-lexico.l"
 {
                  ECHO;
                  return (CONST_CHAR);
@@ -1212,7 +1213,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 260 "analisador-lexico.l"
+#line 261 "analisador-lexico.l"
 {
               ECHO;
 			         return DOISPONTOS;
@@ -1220,7 +1221,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 265 "analisador-lexico.l"
+#line 266 "analisador-lexico.l"
 {
               ECHO;
 			        return VIRGULA;
@@ -1228,7 +1229,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 269 "analisador-lexico.l"
+#line 270 "analisador-lexico.l"
 {
               ECHO;
 			        return PONTOVIRGULA;
@@ -1236,7 +1237,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 273 "analisador-lexico.l"
+#line 274 "analisador-lexico.l"
 {
               ECHO;
 			        return APARENTESE;
@@ -1244,7 +1245,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 277 "analisador-lexico.l"
+#line 278 "analisador-lexico.l"
 {
               ECHO;
 			        return FPARENTESE;
@@ -1253,7 +1254,7 @@ YY_RULE_SETUP
 case 51:
 /* rule 51 can match eol */
 YY_RULE_SETUP
-#line 282 "analisador-lexico.l"
+#line 283 "analisador-lexico.l"
 {
               ECHO;
     			    contLinhas++;
@@ -1262,17 +1263,17 @@ YY_RULE_SETUP
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 288 "analisador-lexico.l"
+#line 289 "analisador-lexico.l"
 {
               ECHO;
             }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 293 "analisador-lexico.l"
+#line 294 "analisador-lexico.l"
 ECHO;
 	YY_BREAK
-#line 1276 "lex.yy.c"
+#line 1277 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2273,7 +2274,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 293 "analisador-lexico.l"
+#line 294 "analisador-lexico.l"
 
 
 

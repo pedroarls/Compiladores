@@ -86,9 +86,7 @@
 %nonassoc ELSE
 
 %%
-partida: program {
-					printf("\nFuncionou no yacc: %d\n",yylval.iValue);
-				}
+partida: program 
 	;
 
 program : PROGRAM M2 declaracoes M0 bloco
@@ -278,22 +276,20 @@ booleano : VERDADEIRO
 	 | FALSO
 	 ;
 
-identificador : ID {
-	printf("okokok");
-//install($1.nome,$1);
-}
+identificador : ID
 			;
 
 %%
 extern int contLinhas;
 extern YYSTYPE yylval;
+
 void yyerror(char *s) {
 	printf("\nFoi encontrado um erro proximo a linha: %d\n", contLinhas);
 }
 
 int main(void) {
 	printf("%d ",contLinhas);
-  int executou= yyparse();
+  	int executou= yyparse();
 
 	if(!executou){//É 0 se executou
 		 printf("\nPrograma sintaticamente correto!\n");
