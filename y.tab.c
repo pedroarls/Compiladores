@@ -99,11 +99,12 @@
 
 		strcpy(atributo.nome,sym_name);
 		atributo.tipo = pTipo;
+		// pTipo = 0;
 		Instala(sym_name,atributo);
 	}
 
 
-#line 107 "y.tab.c" /* yacc.c:339  */
+#line 108 "y.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -247,13 +248,13 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 42 "bas.y" /* yacc.c:355  */
+#line 43 "bas.y" /* yacc.c:355  */
 
 		int iValue;
 		char* sIndex;
 
 
-#line 257 "y.tab.c" /* yacc.c:355  */
+#line 258 "y.tab.c" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -270,7 +271,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 274 "y.tab.c" /* yacc.c:358  */
+#line 275 "y.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -572,16 +573,16 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,   103,   103,   106,   109,   112,   113,   116,   117,   118,
-     121,   121,   124,   125,   126,   127,   130,   133,   136,   139,
-     142,   145,   148,   151,   154,   157,   160,   161,   164,   167,
-     168,   171,   172,   173,   174,   177,   180,   181,   184,   187,
-     188,   191,   192,   195,   198,   199,   202,   203,   204,   205,
-     206,   207,   208,   209,   210,   211,   214,   217,   220,   223,
-     224,   226,   229,   232,   235,   238,   241,   242,   245,   248,
-     249,   252,   253,   256,   259,   260,   261,   262,   263,   264,
-     265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
-     275,   278,   279,   282,   283,   286,   289,   290,   293
+       0,   104,   104,   107,   110,   113,   114,   117,   118,   119,
+     122,   122,   125,   126,   127,   128,   131,   134,   137,   140,
+     143,   146,   149,   152,   155,   158,   161,   162,   165,   168,
+     169,   172,   173,   174,   175,   178,   181,   182,   185,   188,
+     189,   192,   193,   196,   199,   200,   203,   204,   205,   206,
+     207,   208,   209,   210,   211,   212,   215,   218,   221,   224,
+     225,   227,   230,   233,   236,   239,   242,   243,   246,   249,
+     250,   253,   254,   257,   260,   261,   262,   263,   264,   265,
+     266,   267,   268,   269,   270,   271,   272,   273,   274,   275,
+     276,   279,   280,   283,   284,   287,   290,   291,   294
 };
 #endif
 
@@ -1511,43 +1512,43 @@ yyreduce:
   switch (yyn)
     {
         case 10:
-#line 121 "bas.y" /* yacc.c:1646  */
+#line 122 "bas.y" /* yacc.c:1646  */
     { }
-#line 1517 "y.tab.c" /* yacc.c:1646  */
+#line 1518 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 121 "bas.y" /* yacc.c:1646  */
+#line 122 "bas.y" /* yacc.c:1646  */
     { }
-#line 1523 "y.tab.c" /* yacc.c:1646  */
+#line 1524 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 124 "bas.y" /* yacc.c:1646  */
+#line 125 "bas.y" /* yacc.c:1646  */
     {pTipo=(yyvsp[0].iValue);}
-#line 1529 "y.tab.c" /* yacc.c:1646  */
+#line 1530 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 125 "bas.y" /* yacc.c:1646  */
+#line 126 "bas.y" /* yacc.c:1646  */
     {pTipo=(yyvsp[0].iValue);}
-#line 1535 "y.tab.c" /* yacc.c:1646  */
+#line 1536 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 126 "bas.y" /* yacc.c:1646  */
+#line 127 "bas.y" /* yacc.c:1646  */
     {pTipo=(yyvsp[0].iValue);}
-#line 1541 "y.tab.c" /* yacc.c:1646  */
+#line 1542 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 98:
-#line 293 "bas.y" /* yacc.c:1646  */
+#line 294 "bas.y" /* yacc.c:1646  */
     {instala((yyvsp[0].sIndex));}
-#line 1547 "y.tab.c" /* yacc.c:1646  */
+#line 1548 "y.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1551 "y.tab.c" /* yacc.c:1646  */
+#line 1552 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1775,13 +1776,13 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 296 "bas.y" /* yacc.c:1906  */
+#line 297 "bas.y" /* yacc.c:1906  */
 
 extern int contLinhas;
 extern YYSTYPE yylval;
 
 void yyerror(char *s) {
-	printf("\nFoi encontrado um erro proximo a linha: %d\n", contLinhas);
+	printf("\n\nFoi encontrado um erro proximo a linha: %d\n", contLinhas);
 }
 
 int main(void) {

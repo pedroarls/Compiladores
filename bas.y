@@ -11,29 +11,12 @@
 
 	int contErros, pTipo;
 
-	//int instala(char* nome){
-		//nome = YYSTYPE;
-		//valor =
-		//tipo = bool, char, int ...
-	//}
-
-	// void pegaTipo(char *sym_type){
-	// 	if(strcmp(sym_type, "integer"))
-	// 		pTipo = 0;
-	// 	else if(strcmp(sym_type, "char"))
-	// 		pTipo = 1;
-	// 	else if(strcmp(sym_type, "boolean"))
-	// 		pTipo = 2;
-	// 	else
-	// 		pTipo = 3;
-	// }
-
-
 	void instala(char *sym_name ){
 		simbolo_t atributo;
 
 		strcpy(atributo.nome,sym_name);
 		atributo.tipo = pTipo;
+		// pTipo = 0;
 		Instala(sym_name,atributo);
 	}
 
@@ -298,7 +281,7 @@ extern int contLinhas;
 extern YYSTYPE yylval;
 
 void yyerror(char *s) {
-	printf("\nFoi encontrado um erro proximo a linha: %d\n", contLinhas);
+	printf("\n\nFoi encontrado um erro proximo a linha: %d\n", contLinhas);
 }
 
 int main(void) {
