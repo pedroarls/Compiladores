@@ -20,9 +20,9 @@ void iniciaListaNO()
 void Erro(int num)
 {
 	switch (num) {
-		case 1: printf("Tabela de Simbolos cheia\n"); break;
-		case 2: printf("Item nao foi encontrado\n"); break;
-		case 3: printf("Item ja foi inserido\n"); break;
+		case 1: printf("\nTabela de Simbolos cheia\n"); break;
+		case 2: printf("\nItem nao foi encontrado\n"); break;
+		case 3: //printf("\nItem ja foi inserido\n"); break;
 		default: ;
 	}
 }
