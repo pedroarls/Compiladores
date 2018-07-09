@@ -2,6 +2,7 @@
 	#include <stdio.h>
 	#include <stdlib.h>
 	#include <string.h>
+
 	#include "tabela.h"
 
 	int yydebug = 0; /* For Debugging */
@@ -18,6 +19,23 @@
 		atributo.tipo = pTipo;
 		// pTipo = 0;
 		Instala(sym_name,atributo);
+	}
+	void tokeniza(int* string){
+		/* int final = strlen(string);
+		int vetor[strlen(string)]; */
+		int i,j=0;
+
+		printf("%d",*string);
+		/* for(i=final;i>=0;i--)
+		{
+			if((string[i]>='0') && (string[i]<='9')){
+				vetor[j] = string[i];
+				j++;
+			}else{
+				break;
+			}
+		} */
+		//printf("%s",vetor);
 	}
 
 	void verifica(char *sym_name){
@@ -36,6 +54,7 @@
 
 %union{
 		int iValue;
+		int* iValueP;
 		char* sIndex;
 
 };
@@ -73,7 +92,7 @@
 %token <iValue>CHAR
 %token FALSO
 %token VERDADEIRO
-%token <iValue> NUMERO
+%token <iValueP> NUMERO
 
 %left LT
 %left GT
@@ -278,7 +297,7 @@ int_ou_char : inteiro
 		| CONST_CHAR
 		;
 
-inteiro : NUMERO
+inteiro : NUMERO {tokeniza($1);}
 	;
 
 booleano : VERDADEIRO

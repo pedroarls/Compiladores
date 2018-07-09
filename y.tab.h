@@ -154,13 +154,14 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 37 "bas.y" /* yacc.c:1909  */
+#line 55 "bas.y" /* yacc.c:1909  */
 
 		int iValue;
+		int* iValueP;
 		char* sIndex;
 
 
-#line 164 "y.tab.h" /* yacc.c:1909  */
+#line 165 "y.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

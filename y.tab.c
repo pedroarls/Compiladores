@@ -67,6 +67,7 @@
 	#include <stdio.h>
 	#include <stdlib.h>
 	#include <string.h>
+
 	#include "tabela.h"
 
 	int yydebug = 0; /* For Debugging */
@@ -84,6 +85,23 @@
 		// pTipo = 0;
 		Instala(sym_name,atributo);
 	}
+	void tokeniza(int* string){
+		/* int final = strlen(string);
+		int vetor[strlen(string)]; */
+		int i,j=0;
+
+		printf("%d",*string);
+		/* for(i=final;i>=0;i--)
+		{
+			if((string[i]>='0') && (string[i]<='9')){
+				vetor[j] = string[i];
+				j++;
+			}else{
+				break;
+			}
+		} */
+		//printf("%s",vetor);
+	}
 
 	void verifica(char *sym_name){
 	int r;
@@ -98,7 +116,7 @@
 }
 
 
-#line 102 "y.tab.c" /* yacc.c:339  */
+#line 120 "y.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -242,13 +260,14 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 37 "bas.y" /* yacc.c:355  */
+#line 55 "bas.y" /* yacc.c:355  */
 
 		int iValue;
+		int* iValueP;
 		char* sIndex;
 
 
-#line 252 "y.tab.c" /* yacc.c:355  */
+#line 271 "y.tab.c" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -265,7 +284,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 269 "y.tab.c" /* yacc.c:358  */
+#line 288 "y.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -567,16 +586,16 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    98,    98,   101,   101,   104,   107,   108,   111,   112,
-     113,   116,   116,   119,   120,   121,   122,   125,   128,   131,
-     134,   137,   140,   143,   146,   149,   152,   155,   156,   159,
-     162,   163,   166,   167,   168,   169,   172,   175,   176,   179,
-     182,   183,   186,   187,   190,   193,   194,   197,   198,   199,
-     200,   201,   202,   203,   204,   205,   206,   209,   212,   215,
-     218,   219,   221,   224,   227,   230,   233,   236,   237,   240,
-     243,   244,   247,   248,   251,   254,   255,   256,   257,   258,
-     259,   260,   261,   262,   263,   264,   265,   266,   267,   268,
-     269,   270,   273,   274,   277,   278,   281,   284,   285,   288
+       0,   117,   117,   120,   120,   123,   126,   127,   130,   131,
+     132,   135,   135,   138,   139,   140,   141,   144,   147,   150,
+     153,   156,   159,   162,   165,   168,   171,   174,   175,   178,
+     181,   182,   185,   186,   187,   188,   191,   194,   195,   198,
+     201,   202,   205,   206,   209,   212,   213,   216,   217,   218,
+     219,   220,   221,   222,   223,   224,   225,   228,   231,   234,
+     237,   238,   240,   243,   246,   249,   252,   255,   256,   259,
+     262,   263,   266,   267,   270,   273,   274,   275,   276,   277,
+     278,   279,   280,   281,   282,   283,   284,   285,   286,   287,
+     288,   289,   292,   293,   296,   297,   300,   303,   304,   307
 };
 #endif
 
@@ -1512,49 +1531,55 @@ yyreduce:
   switch (yyn)
     {
         case 3:
-#line 101 "bas.y" /* yacc.c:1646  */
+#line 120 "bas.y" /* yacc.c:1646  */
     {decVar=1;}
-#line 1518 "y.tab.c" /* yacc.c:1646  */
+#line 1537 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 116 "bas.y" /* yacc.c:1646  */
+#line 135 "bas.y" /* yacc.c:1646  */
     { }
-#line 1524 "y.tab.c" /* yacc.c:1646  */
+#line 1543 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 116 "bas.y" /* yacc.c:1646  */
+#line 135 "bas.y" /* yacc.c:1646  */
     { }
-#line 1530 "y.tab.c" /* yacc.c:1646  */
+#line 1549 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 119 "bas.y" /* yacc.c:1646  */
+#line 138 "bas.y" /* yacc.c:1646  */
     {pTipo=(yyvsp[0].iValue);}
-#line 1536 "y.tab.c" /* yacc.c:1646  */
+#line 1555 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 120 "bas.y" /* yacc.c:1646  */
+#line 139 "bas.y" /* yacc.c:1646  */
     {pTipo=(yyvsp[0].iValue);}
-#line 1542 "y.tab.c" /* yacc.c:1646  */
+#line 1561 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 15:
-#line 121 "bas.y" /* yacc.c:1646  */
+#line 140 "bas.y" /* yacc.c:1646  */
     {pTipo=(yyvsp[0].iValue);}
-#line 1548 "y.tab.c" /* yacc.c:1646  */
+#line 1567 "y.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 96:
+#line 300 "bas.y" /* yacc.c:1646  */
+    {tokeniza((yyvsp[0].iValueP));}
+#line 1573 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 99:
-#line 288 "bas.y" /* yacc.c:1646  */
+#line 307 "bas.y" /* yacc.c:1646  */
     {verifica((yyvsp[0].sIndex));}
-#line 1554 "y.tab.c" /* yacc.c:1646  */
+#line 1579 "y.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1558 "y.tab.c" /* yacc.c:1646  */
+#line 1583 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1782,7 +1807,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 291 "bas.y" /* yacc.c:1906  */
+#line 310 "bas.y" /* yacc.c:1906  */
 
 extern int contLinhas;
 extern YYSTYPE yylval;
