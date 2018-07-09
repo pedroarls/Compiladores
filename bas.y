@@ -9,7 +9,7 @@
 	int yylex();
 	void yyerror(char *s);
 
-	int contErros, pTipo, decVar;
+	int contErros, pTipo;
 
 	//int instala(char* nome){
 		//nome = YYSTYPE;
@@ -33,19 +33,7 @@
 
 		strcpy(atributo.nome,sym_name);
 		atributo.tipo = pTipo;
-		pTipo=0;
 		Instala(sym_name,atributo);
-	}
-
-	void verifica(char *sym_name){
-		int r;
-		r = Recupera_Entrada(sym_name);
-		if((r==0) && (decVar == 1)){
-			printf("\nVariável utilizada e não declarada anteriormente!");
-			yyerror(sym_name);
-		}
-		else if(decVar == 0)
-			instala(sym_name);
 	}
 
 %}
@@ -120,7 +108,7 @@ program : PROGRAM M2 declaracoes M0 bloco
 bloco   : BGN lista_de_comandos M0 END
 		;
 
-declaracoes : declaracoes M0 declaracao PONTOVIRGULA {decVar =1;}
+declaracoes : declaracoes M0 declaracao PONTOVIRGULA
 		| vazio
 		;
 
@@ -132,9 +120,9 @@ declaracao : decl_de_var
 decl_de_var : tipo { } DOISPONTOS lista_de_ids { }
 		;
 
-tipo : INTEGER {pTipo=0;}
- | BOOLEAN {pTipo=1;}
- | CHAR {pTipo=2;}
+tipo : INTEGER {pTipo=1;}
+ | BOOLEAN {pTipo=2;}
+ | CHAR {pTipo=3;}
  | tipo_definido
  ;
 
@@ -301,7 +289,7 @@ booleano : VERDADEIRO
 	 | FALSO
 	 ;
 
-identificador : ID{verifica($1);}
+identificador : ID{instala($1);}
 			;
 
 %%
