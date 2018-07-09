@@ -24,8 +24,9 @@
 	int r;
 	r = Recupera_Entrada(sym_name);
 	if((r==0) && (decVar == 1)){
-		printf("\nVariável utilizada e não declarada anteriormente!");
 		yyerror(sym_name);
+		printf("Variável utilizada e não declarada anteriormente!\n");
+		exit(1);
 	}
 	else if(decVar == 0)
 		instala(sym_name);
@@ -97,13 +98,13 @@
 partida: program
 	;
 
-program : PROGRAM M2 declaracoes M0 bloco
+program : PROGRAM M2 declaracoes M0 {decVar=1;} bloco
 			;
 
 bloco   : BGN lista_de_comandos M0 END
 		;
 
-declaracoes : declaracoes M0 declaracao PONTOVIRGULA {decVar=1;}
+declaracoes : declaracoes M0 declaracao PONTOVIRGULA
 		| vazio
 		;
 
