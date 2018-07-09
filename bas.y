@@ -11,28 +11,12 @@
 
 	int contErros, pTipo;
 
-	//int instala(char* nome){
-		//nome = YYSTYPE;
-		//valor =
-		//tipo = bool, char, int ...
-	//}
-
-	void pegaTipo(char *sym_type){
-		if(strcmp(sym_type, "integer"))
-			pTipo = 0;
-		else if(strcmp(sym_type, "char"))
-			pTipo = 1;
-		else if(strcmp(sym_type, "boolean"))
-			pTipo = 2;
-		else
-			pTipo = 3;
-	}
-
 	void instala(char *sym_name ){
 		simbolo_t atributo;
 
 		strcpy(atributo.nome,sym_name);
 		atributo.tipo = pTipo;
+		// pTipo = 0;
 		Instala(sym_name,atributo);
 	}
 
@@ -51,7 +35,7 @@
 %token ENDIF
 %token ENDWHILE
 %token EXIT
-%token INTEGER
+%token <iValue>INTEGER
 %token PROCEDURE
 %token PROGRAM
 %token REFERENCE
@@ -59,7 +43,7 @@
 %token READ
 %token RETURN
 %token THEN
-%token TYPE
+%token <iValue>TYPE
 %token UNTIL
 %token VALUE
 %token WRITE
@@ -73,8 +57,8 @@
 %token PONTOVIRGULA
 %token APARENTESE
 %token FPARENTESE
-%token BOOLEAN
-%token CHAR
+%token <iValue>BOOLEAN
+%token <iValue>CHAR
 %token FALSO
 %token VERDADEIRO
 %token <iValue> NUMERO
@@ -120,9 +104,9 @@ declaracao : decl_de_var
 decl_de_var : tipo { } DOISPONTOS lista_de_ids { }
 		;
 
-tipo : INTEGER {pTipo=1;}
- | BOOLEAN {pTipo=2;}
- | CHAR {pTipo=3;}
+tipo : INTEGER {pTipo=$1;}
+ | BOOLEAN {pTipo=$1;}
+ | CHAR {pTipo=$1;}
  | tipo_definido
  ;
 
@@ -297,7 +281,7 @@ extern int contLinhas;
 extern YYSTYPE yylval;
 
 void yyerror(char *s) {
-	printf("\nFoi encontrado um erro proximo a linha: %d\n", contLinhas);
+	printf("\n\nFoi encontrado um erro proximo a linha: %d\n", contLinhas);
 }
 
 int main(void) {
@@ -306,11 +290,12 @@ int main(void) {
 	printf("%d ",contLinhas);
   	int executou= yyparse();
 
+
 	if(!executou){//É 0 se executou
 		 printf("\nPrograma sintaticamente correto!\n");
 	}
 
-	printf("\n");
+	printf("\n\n");
 	Imprime_Tabela();
 
   return 0;

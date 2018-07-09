@@ -26,270 +26,271 @@ caractere   \'[A-Z]\'
 {ws}            {ECHO;}
 {comentario}    {ECHO;}
 
-"begin"     {
-                ECHO;
-                return (BGN);
-            }
+"begin"         {
+                    ECHO;
+                    return (BGN);
+                }
 
 
-"boolean"   {
-                ECHO;
-                return (BOOLEAN);
-            }
+"boolean"       {
+                    ECHO;
+                    yylval.iValue = BOOLEAN;
+                    return (BOOLEAN);
+                }
 
-"char"      {
-                ECHO;
-                return (CHAR);
-            }
+"char"          {
+                    ECHO;
+                    yylval.iValue = CHAR;
+                    return (CHAR);
+                }
 
-"do"        {
-                ECHO;
-                 return (DO);
-            }
-
-
-"if"        {
-                ECHO;
-                return (IF);
-            }
-
-"else"      {
-                ECHO;
-                return (ELSE);
-
-            }
-
-"end"       {
-                ECHO;
-                return (END);
-
-            }
-
-"endif"     {
-                ECHO;
-                return (ENDIF);
-
-            }
-
-"endwhile"  {
-                 ECHO;
-                 return (ENDWHILE);
-            }
-
-"exit"      {
-                 ECHO;
-                 return (EXIT);
-            }
-
-"false"     {
-                ECHO;
-                return (FALSO);
-            }
-
-"integer"   {
-                ECHO;
-                return (INTEGER);
-            }
-
-"not"       {
-                ECHO;
-                return (NOT);
-            }
+"do"            {
+                    ECHO;
+                    return (DO);
+                }
 
 
-"procedure" {
-                ECHO;
-                return (PROCEDURE);
-            }
+"if"            {
+                    ECHO;
+                    return (IF);
+                }
 
-"program"   {
-                ECHO;
-                return (PROGRAM);
-            }
+"else"          {
+                    ECHO;
+                    return (ELSE);
 
-"reference" {
-                ECHO;
-                return (REFERENCE);
-            }
+                }
 
-"repeat"    {
-                ECHO;
-                return (REPEAT);
-            }
+"end"           {
+                    ECHO;
+                    return (END);
+                }
 
-"read"      {
-                ECHO;
-                return (READ);
-            }
+"endif"         {
+                    ECHO;
+                    return (ENDIF);
 
-"return"    {
-                ECHO;
-                return (RETURN);
-            }
+                }
 
-"then"      {
-                ECHO;
-                return (THEN);
-            }
+"endwhile"      {
+                    ECHO;
+                    return (ENDWHILE);
+                }
 
-"true"      {
-                ECHO;
-                return (VERDADEIRO);
-            }
+"exit"          {
+                    ECHO;
+                    return (EXIT);
+                }
 
+"false"         {
+                    ECHO;
+                    return (FALSO);
+                }
 
-"type"      {
-                ECHO;
-                return (TYPE);
-            }
+"integer"       {
+                    ECHO;
+                    yylval.iValue = INTEGER;
+                    return (INTEGER);
+                }
 
-"until"     {
-                 ECHO;
-                 return (UNTIL);
-            }
-
-"value"     {
-                 ECHO;
-              	 return (VALUE);
-            }
-
-"write"     {
-                 ECHO;
-                 return (WRITE);
-            }
-
-"while"     {
-                 ECHO;
-                 return (WHILE);
-            }
+"not"           {
+                    ECHO;
+                    return (NOT);
+                }
 
 
-"<"         {
-                 ECHO;
-                 return (LT);
+"procedure"     {
+                    ECHO;
+                    return (PROCEDURE);
+                }
 
-            }
+"program"       {
+                    ECHO;
+                    return (PROGRAM);
+                }
 
-">"         {
-                 ECHO;
-                 return (GT);
-            }
+"reference"     {
+                    ECHO;
+                    return (REFERENCE);
+                }
 
-"<="        {
-                 ECHO;
-                 return (LE);
+"repeat"        {
+                    ECHO;
+                    return (REPEAT);
+                }
 
-            }
+"read"          {
+                    ECHO;
+                    return (READ);
+                }
 
-">="        {
-                ECHO;
-                return (GE);
+"return"        {
+                    ECHO;
+                    return (RETURN);
+                }
 
-            }
+"then"          {
+                    ECHO;
+                    return (THEN);
+                }
 
-"="         {
-                ECHO;
-                return (EQ);
-
-            }
-
-":="         {
-                ECHO;
-                return (ATRIBUICAO);
-
-            }
-
-"not="      {
-                ECHO;
-                return (NE);
-            }
-
-"/"         {
-                ECHO;
-                return (DIV);
-            }
-
-"*"         {
-                ECHO;
-                return (MULT);
-            }
-
-"+"         {
-                ECHO;
-                return (SUM);
-            }
-
-"-"         {
-                ECHO;
-                return (SUB);
-            }
-
-"**"        {
-                ECHO;
-                return (EXP);
-            }
-
-"|"         {
-                ECHO;
-                return (OR);
-            }
-
-"&"         {
-                ECHO;
-                return (AND);
-            }
-
-{id}        {
-                ECHO;
-                yylval.sIndex = yytext;
-                return (ID);
-            }
-
-{numero}    {
-                ECHO;
-                return (NUMERO);
-            }
+"true"          {
+                    ECHO;
+                    return (VERDADEIRO);
+                }
 
 
-{caractere} {
-                 ECHO;
-                 return (CONST_CHAR);
+"type"          {
+                    ECHO;
+                    return (TYPE);
+                }
 
-            }
+"until"         {
+                    ECHO;
+                    return (UNTIL);
+                }
 
-[:]         {
-              ECHO;
-			         return DOISPONTOS;
+"value"         {
+                    ECHO;
+              	    return (VALUE);
+                }
+
+"write"         {
+                    ECHO;
+                    return (WRITE);
+                }
+
+"while"         {
+                    ECHO;
+                    return (WHILE);
+                }
+
+
+"<"             {
+                    ECHO;
+                    return (LT);
+                }
+
+">"             {
+                    ECHO;
+                    return (GT);
+                }
+
+"<="            {
+                    ECHO;
+                    return (LE);
+
+                }
+
+">="            {
+                    ECHO;
+                    return (GE);
+                }
+
+"="             {
+                    ECHO;
+                    return (EQ);
+                }
+
+":="            {  
+                    ECHO;
+                    return (ATRIBUICAO);
+                }
+
+"not="          {
+                    ECHO;
+                    return (NE);
+                }
+
+"/"             {
+                    ECHO;
+                    return (DIV);
+                }
+
+"*"             {
+                    ECHO;
+                    return (MULT);
+                }
+
+"+"             {
+                    ECHO;
+                    return (SUM);
+                }
+
+"-"             {
+                    ECHO;
+                    return (SUB);
+                }
+
+"**"            {
+                    ECHO;
+                    return (EXP);
+                }
+
+"|"             {
+                    ECHO;
+                    return (OR);
+                }
+
+"&"             {
+                    ECHO;
+                    return (AND);
+                }
+
+{id}            {
+                    ECHO;
+                    yylval.sIndex = yytext;
+                    return (ID);
+                }
+
+{numero}        {
+                    ECHO;
+                    return (NUMERO);
+                }
+
+
+{caractere}     {
+                    ECHO;
+                    return (CONST_CHAR);
+
+                }
+
+[:]             {
+                    ECHO;
+			        return DOISPONTOS;
 		        }
 
-[,]         {
-              ECHO;
+[,]             {
+                    ECHO;
 			        return VIRGULA;
 		        }
-[;]         {
-              ECHO;
+
+[;]             {
+                    ECHO;
 			        return PONTOVIRGULA;
 		        }
-[(]         {
-              ECHO;
+
+[(]             {
+                    ECHO;
 			        return APARENTESE;
 		        }
-[)]         {
-              ECHO;
+
+[)]             {
+                    ECHO;
 			        return FPARENTESE;
 		        }
 
-"\n"        {
-              ECHO;
+"\n"            {
+                    ECHO;
     			    contLinhas++;
-              printf("%d ", contLinhas);
+                    printf("%d ", contLinhas);
     		    }
 
-.           {
-              ECHO;
-            }
-
-
+.               {
+                    // ECHO;
+                    printf("\nErro lexico na linha %d.\n",contLinhas);
+                    exit(1);
+                }
 %%
 
 //int main(void)
