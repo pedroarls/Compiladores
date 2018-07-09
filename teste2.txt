@@ -2,7 +2,7 @@ program
 	integer : weight, group, charge, distance;
 begin
 	distance := 2300;
-	read weight;
+	read data;
 	if weight > 60 then group := 5 + 97
 		       else group := (weight + 14) / 15 + 97
 	endif;

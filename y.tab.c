@@ -74,7 +74,7 @@
 	int yylex();
 	void yyerror(char *s);
 
-	int contErros, pTipo;
+	int contErros, pTipo, decVar;
 
 	//int instala(char* nome){
 		//nome = YYSTYPE;
@@ -98,11 +98,23 @@
 
 		strcpy(atributo.nome,sym_name);
 		atributo.tipo = pTipo;
+		pTipo=0;
 		Instala(sym_name,atributo);
 	}
 
+	void verifica(char *sym_name){
+		int r;
+		r = Recupera_Entrada(sym_name);
+		if((r==0) && (decVar == 1)){
+			printf("\nVariável utilizada e não declarada anteriormente!");
+			yyerror(sym_name);
+		}
+		else if(decVar == 0)
+			instala(sym_name);
+	}
 
-#line 106 "y.tab.c" /* yacc.c:339  */
+
+#line 118 "y.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -246,13 +258,13 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 41 "bas.y" /* yacc.c:355  */
+#line 53 "bas.y" /* yacc.c:355  */
 
 		int iValue;
 		char* sIndex;
 
 
-#line 256 "y.tab.c" /* yacc.c:355  */
+#line 268 "y.tab.c" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -269,7 +281,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 273 "y.tab.c" /* yacc.c:358  */
+#line 285 "y.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -571,16 +583,16 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,   102,   102,   105,   108,   111,   112,   115,   116,   117,
-     120,   120,   123,   124,   125,   126,   129,   132,   135,   138,
-     141,   144,   147,   150,   153,   156,   159,   160,   163,   166,
-     167,   170,   171,   172,   173,   176,   179,   180,   183,   186,
-     187,   190,   191,   194,   197,   198,   201,   202,   203,   204,
-     205,   206,   207,   208,   209,   210,   213,   216,   219,   222,
-     223,   225,   228,   231,   234,   237,   240,   241,   244,   247,
-     248,   251,   252,   255,   258,   259,   260,   261,   262,   263,
-     264,   265,   266,   267,   268,   269,   270,   271,   272,   273,
-     274,   277,   278,   281,   282,   285,   288,   289,   292
+       0,   114,   114,   117,   120,   123,   124,   127,   128,   129,
+     132,   132,   135,   136,   137,   138,   141,   144,   147,   150,
+     153,   156,   159,   162,   165,   168,   171,   172,   175,   178,
+     179,   182,   183,   184,   185,   188,   191,   192,   195,   198,
+     199,   202,   203,   206,   209,   210,   213,   214,   215,   216,
+     217,   218,   219,   220,   221,   222,   225,   228,   231,   234,
+     235,   237,   240,   243,   246,   249,   252,   253,   256,   259,
+     260,   263,   264,   267,   270,   271,   272,   273,   274,   275,
+     276,   277,   278,   279,   280,   281,   282,   283,   284,   285,
+     286,   289,   290,   293,   294,   297,   300,   301,   304
 };
 #endif
 
@@ -1509,44 +1521,50 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-        case 10:
-#line 120 "bas.y" /* yacc.c:1646  */
-    { }
-#line 1516 "y.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 11:
-#line 120 "bas.y" /* yacc.c:1646  */
-    { }
-#line 1522 "y.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 12:
+        case 5:
 #line 123 "bas.y" /* yacc.c:1646  */
-    {pTipo=1;}
+    {decVar =1;}
 #line 1528 "y.tab.c" /* yacc.c:1646  */
     break;
 
-  case 13:
-#line 124 "bas.y" /* yacc.c:1646  */
-    {pTipo=2;}
+  case 10:
+#line 132 "bas.y" /* yacc.c:1646  */
+    { }
 #line 1534 "y.tab.c" /* yacc.c:1646  */
     break;
 
-  case 14:
-#line 125 "bas.y" /* yacc.c:1646  */
-    {pTipo=3;}
+  case 11:
+#line 132 "bas.y" /* yacc.c:1646  */
+    { }
 #line 1540 "y.tab.c" /* yacc.c:1646  */
     break;
 
-  case 98:
-#line 292 "bas.y" /* yacc.c:1646  */
-    {instala((yyvsp[0].sIndex));}
+  case 12:
+#line 135 "bas.y" /* yacc.c:1646  */
+    {pTipo=0;}
 #line 1546 "y.tab.c" /* yacc.c:1646  */
     break;
 
+  case 13:
+#line 136 "bas.y" /* yacc.c:1646  */
+    {pTipo=1;}
+#line 1552 "y.tab.c" /* yacc.c:1646  */
+    break;
 
-#line 1550 "y.tab.c" /* yacc.c:1646  */
+  case 14:
+#line 137 "bas.y" /* yacc.c:1646  */
+    {pTipo=2;}
+#line 1558 "y.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 98:
+#line 304 "bas.y" /* yacc.c:1646  */
+    {verifica((yyvsp[0].sIndex));}
+#line 1564 "y.tab.c" /* yacc.c:1646  */
+    break;
+
+
+#line 1568 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1774,7 +1792,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 295 "bas.y" /* yacc.c:1906  */
+#line 307 "bas.y" /* yacc.c:1906  */
 
 extern int contLinhas;
 extern YYSTYPE yylval;
