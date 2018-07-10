@@ -154,7 +154,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 60 "bas.y" /* yacc.c:1909  */
+#line 77 "bas.y" /* yacc.c:1909  */
 
 		int iValue;
 		char* sIndex;

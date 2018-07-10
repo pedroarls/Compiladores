@@ -1,0 +1,8 @@
+program
+	integer : weight;
+    type X = (1:10) integer;
+begin
+    
+    weight := 0
+	
+end

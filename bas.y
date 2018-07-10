@@ -10,7 +10,7 @@
 	int yylex();
 	void yyerror(char *s);
 
-	int contErros, pTipo;
+	int contErros, pTipo,limiteInferior, limiteSuperior;
 	char *identificadorAtual;
 	char *tipoFuncao;
 	char *tipoRetornolAtual;
@@ -53,6 +53,23 @@
 		if(num < -32768 || num>32767){
 			yyerror(" ");
 		}
+	}
+
+	void verificaLimites(){
+		if(limiteInferior < 0){
+			yyerror(" ");
+		}
+
+		if(limiteSuperior < 0){
+			yyerror(" ");
+		}
+
+
+		if(limiteSuperior<limiteInferior){
+			yyerror(" ");
+		}
+
+
 	}
 
 %}
@@ -178,7 +195,7 @@ nome_do_tipo : identificador {$$ = strdup($1);}
 definicao_de_tipo : APARENTESE limites FPARENTESE tipo
 				;
 
-limites : inteiro DOISPONTOS inteiro
+limites : inteiro DOISPONTOS inteiro {limiteInferior = $1; limiteSuperior= $3; verificaLimites();}
 	;
 
 tipo_definido : identificador
