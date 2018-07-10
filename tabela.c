@@ -88,10 +88,56 @@ void Imprime_Tabela()
 	int i;
 	printf("Tabela de Simbolos:\n");
 	printf("===================\n\n");
-	printf("INDICE\t\tTIPO\t\tNOME\n");
-	printf("======\t\t====\t\t====\n");
+	printf("INDICE\t\tTIPO\t\tNOME\t\tVALOR\n");
+	printf("======\t\t====\t\t====\t\t====\n");
 	for (i = 1; i < L ; i++ )
 	{
-		printf("%d\t\t%d\t\t%s\n", i, tabela_simbolos[i].tipo, tabela_simbolos[i].nome);
+		printf("%d\t\t%d\t\t%s\t\t%d\n", i, tabela_simbolos[i].tipo, tabela_simbolos[i].nome,tabela_simbolos[i].valor_inteiro);
 	}
+}
+
+int getValorInteiro(char *X){
+	int K;
+	K = L;
+	
+	while (K > escopo[nivel]) {
+        K--;
+        if( !strcmp(X, tabela_simbolos[K].nome) ) {	// X ja pertence a tabela
+			return tabela_simbolos[K].valor_inteiro;
+		}
+	}
+
+	return 0;
+}
+
+
+void setValorInt(char* X, int valor){
+	int K;
+	K = L;
+	
+	while (K > escopo[nivel]) {
+        K--;
+        if( !strcmp(X, tabela_simbolos[K].nome) ) {	// X ja pertence a tabela
+			tabela_simbolos[K].valor_inteiro = valor;
+		}
+	}
+}
+
+
+simbolo_t RecuperaSimbolo(char* X){
+	int K; /* percorre a lista */
+	K = L;
+
+	simbolo_t s;
+
+	strcpy(s.nome,"Simbolo nao encontrado.\n");
+	s.tipo = -1;
+
+	while (K > 1)
+	{
+        K--;
+        if( !strcmp(X, tabela_simbolos[K].nome ) ) return tabela_simbolos[K];		// X foi encontrado
+	}
+    
+	return s;
 }

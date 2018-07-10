@@ -1,8 +1,13 @@
 program
 	integer : weight, group, charge, distance;
+procedure testeProcedimento(value integer : b):
+    integer : i;
 begin
-    weight := 0;
+    i := 1
+end;
+begin
 	distance := 2300;
+    testeProcedimento := 2300;
 	read weight;
 	if weight > 60 then group := 5 + 97
 		       else group := (weight + 14) / 15 + 97

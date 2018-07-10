@@ -101,6 +101,7 @@ caractere   \'[A-Z]\'
 
 "procedure"     {
                     ECHO;
+                    yylval.iValue = PROCEDURE;
                     return (PROCEDURE);
                 }
 
@@ -245,6 +246,7 @@ caractere   \'[A-Z]\'
 
 {numero}        {
                     ECHO;
+                    yylval.iValue = atoi(yytext);
                     return (NUMERO);
                 }
 

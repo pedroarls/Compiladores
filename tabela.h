@@ -34,7 +34,7 @@ typedef struct simbolo_str
 {
 	char nome[MAX_NOME];
 	int tipo;
-	// int valor_inteiro;
+	int valor_inteiro;
 	// int nivel;
 	// int width;	// quantidade de palavras para alocar a variavel
 	// int offset;	// deslocamento
@@ -65,6 +65,12 @@ void Erro(int numero);
 int  Recupera_Entrada(char *X);
 void Instala(char *X, simbolo_t atribut);
 void Imprime_Tabela();
+
+//Funcoes extras
+simbolo_t RecuperaSimbolo(char* X);
+void setValorInt(char* X, int valor);
+int getValorInteiro(char *X);
+
 
 // Tabela de Simbolos
 int escopo[10];

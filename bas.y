@@ -2,7 +2,7 @@
 	#include <stdio.h>
 	#include <stdlib.h>
 	#include <string.h>
-
+	#include <math.h>
 	#include "tabela.h"
 
 	int yydebug = 0; /* For Debugging */
@@ -10,51 +10,57 @@
 	int yylex();
 	void yyerror(char *s);
 
-	int contErros, pTipo, decVar=0;
+	int contErros, pTipo;
+	char *identificadorAtual;
+	char *tipoFuncao;
+	char *tipoRetornolAtual;
 
 	void instala(char *sym_name ){
 		simbolo_t atributo;
 
 		strcpy(atributo.nome,sym_name);
 		atributo.tipo = pTipo;
-		// pTipo = 0;
 		Instala(sym_name,atributo);
 	}
-	void tokeniza(int* string){
-		/* int final = strlen(string);
-		int vetor[strlen(string)]; */
-		int i,j=0;
 
-		printf("%d",*string);
-		/* for(i=final;i>=0;i--)
-		{
-			if((string[i]>='0') && (string[i]<='9')){
-				vetor[j] = string[i];
-				j++;
-			}else{
-				break;
-			}
-		} */
-		//printf("%s",vetor);
+	void setValor(char* X, int valor){
+		setValorInt(strdup(X), valor);
 	}
 
-	void verifica(char *sym_name){
-	int r;
-	r = Recupera_Entrada(sym_name);
-	if((r==0) && (decVar == 1)){
-		yyerror(sym_name);
-		printf("Variável utilizada e não declarada anteriormente!\n");
-		exit(1);
+	void iniciaBloco(){
+		Entrada_Bloco();
 	}
-	else if(decVar == 0)
-		instala(sym_name);
-}
+
+	void finalizaBloco(){
+		Saida_Bloco();
+	}
+
+	void verificaAtribuicao(){
+		simbolo_t simbolo;
+
+		simbolo = RecuperaSimbolo(identificadorAtual);
+
+		if(simbolo.tipo == PROCEDURE){
+			yyerror(" ");
+		}
+	}
+
+	int getValor_int(char *X){
+		getValorInteiro(X);
+	}
 
 %}
 
 %union{
+		// typedef struct{
+		// 	int tipo;
+		// 	union{
+		// 		int iValue;
+		// 		char character;
+		// 	}
+		// }expressao;
+
 		int iValue;
-		int* iValueP;
 		char* sIndex;
 
 };
@@ -67,7 +73,7 @@
 %token ENDWHILE
 %token EXIT
 %token <iValue>INTEGER
-%token PROCEDURE
+%token <iValue>PROCEDURE
 %token PROGRAM
 %token REFERENCE
 %token REPEAT
@@ -90,25 +96,40 @@
 %token FPARENTESE
 %token <iValue>BOOLEAN
 %token <iValue>CHAR
-%token FALSO
-%token VERDADEIRO
-%token <iValueP> NUMERO
+%token <iValue>FALSO
+%token <iValue>VERDADEIRO
+%token <iValue> NUMERO
 
-%left LT
-%left GT
-%left LE
-%left GE
-%left EQ
-%left NE
-%left DIV
-%left MULT
-%left SUM
-%left SUB
 %left OR
 %left AND
-%left NOT
-%left UMINUS
+%left <iValue>NOT
+%left NE
+%left EQ
+%left LE
+%left LT
+%left GT
+%left GE
+%left <iValue>SUM
+%left <iValue>SUB
+%left <iValue>MULT
+%left <iValue>DIV
 %right EXP
+%left UMINUS
+
+%start partida
+
+%type <sIndex> identificador
+%type <sIndex> nome_do_proc
+%type <iValue> expr
+%type <iValue> inteiro
+%type <iValue> int_ou_char
+%type <iValue> constante
+%type <iValue> booleano
+%type <sIndex> variavel
+%type <sIndex> nome_do_tipo
+%type <sIndex> variavel2
+
+// %type <expressao> expr 
 
 //Não pode aninhar else's
 %nonassoc ELSE
@@ -117,10 +138,10 @@
 partida: program
 	;
 
-program : PROGRAM M2 declaracoes M0 {decVar=1;} bloco
+program : PROGRAM M2 declaracoes M0 bloco
 			;
 
-bloco   : BGN lista_de_comandos M0 END
+bloco   : BGN{} lista_de_comandos M0 END{}
 		;
 
 declaracoes : declaracoes M0 declaracao PONTOVIRGULA
@@ -153,7 +174,7 @@ M2 : vazio
 def_de_tipo : TYPE nome_do_tipo M0 EQ M1 definicao_de_tipo
 			;
 
-nome_do_tipo : identificador
+nome_do_tipo : identificador {$$ = strdup($1);}
 		 ;
 
 definicao_de_tipo : APARENTESE limites FPARENTESE tipo
@@ -168,7 +189,7 @@ tipo_definido : identificador
 decl_de_proc : proc_cab pro_corpo
 		 ;
 
-proc_cab : tipo_retornado PROCEDURE M0 nome_do_proc espec_de_parametros
+proc_cab : tipo_retornado PROCEDURE {pTipo = $2;} M0 nome_do_proc espec_de_parametros 
 	 ;
 
 pro_corpo : DOISPONTOS declaracoes M0 bloco emit_return
@@ -195,15 +216,15 @@ modo : VALUE
  | REFERENCE
  ;
 
-nome_do_proc : identificador
+nome_do_proc : identificador {$$ = strdup($1);}
 		 ;
 
 lista_de_comandos : comando
 				| lista_de_comandos PONTOVIRGULA M0 comando
 				;
 
-lista_de_ids : identificador
-		 | lista_de_ids VIRGULA identificador
+lista_de_ids : identificador 
+		 | lista_de_ids VIRGULA identificador 
 		 ;
 
 vazio :
@@ -225,7 +246,7 @@ comando : comando_de_atribuicao
 	| rotulo DOISPONTOS comando
 	;
 
-comando_de_atribuicao : variavel ATRIBUICAO expr
+comando_de_atribuicao : variavel {verificaAtribuicao();} ATRIBUICAO expr {setValor(strdup($1),$4);}
 					;
 
 comando_while : WHILE M0 expr DO M0 lista_de_comandos ENDWHILE
@@ -252,59 +273,68 @@ comando_exit : EXIT identificador
 rotulo : identificador
 	 ;
 
-variavel : identificador
-	 | chamada_ou_indexacao
+variavel : identificador {$$ = strdup($1);}
+	 | chamada_ou_indexacao {}
 	 ;
 
 chamada_ou_indexacao : indices FPARENTESE
 				 ;
 
 chamada_de_proc : identificador
-					| chamada_ou_indexacao
+					| chamada_ou_indexacao{}
 					;
 
 indices : variavel2 APARENTESE  expr
 	| indices VIRGULA expr
 	;
 
-variavel2 : identificador
+variavel2 : identificador {$$ = strdup($1);}
 		;
 
 expr : expr OR M0 expr
  | expr AND M0 expr
- | NOT expr
+ | NOT expr 
  | expr NE expr
  | expr LT expr
 | expr GT expr
 | expr GE expr
  | expr LE expr
- | expr SUM expr
- | expr SUB expr
- | expr MULT expr
- | expr DIV expr
- | expr EXP expr
- | SUB expr %prec UMINUS
- | variavel
- | constante
- | APARENTESE expr FPARENTESE
+ | expr SUM expr 	{$$ = $1 + $3;}
+ | expr SUB expr 	{$$ = $1 - $3;}
+ | expr MULT expr	{$$ = $1 * $3;}
+ | expr DIV expr	{$$ = $1 / $3;}
+ | expr EXP expr	{$$ = pow($1,$3);}
+ | SUB expr %prec UMINUS {}
+ | variavel { $$ = getValor_int($1);
+ 			}
+ | constante {$$ = $1;}
+ | APARENTESE expr FPARENTESE {$$ = $2;}
  ;
 
-constante : int_ou_char
+constante : int_ou_char {}
 		| booleano
 		;
 
-int_ou_char : inteiro
-		| CONST_CHAR
+int_ou_char : inteiro	{
+							$$ = $1;
+						}
+		| CONST_CHAR {}
 		;
 
-inteiro : NUMERO {tokeniza($1);}
+inteiro : NUMERO 	{
+						$$ = $1;
+					}
 	;
 
 booleano : VERDADEIRO
 	 | FALSO
 	 ;
 
-identificador : ID {verifica($1);}
+identificador : ID	{
+						$$ = strdup($1);
+						identificadorAtual = strdup($1);
+						instala($1);
+					}
 			;
 
 %%
@@ -313,6 +343,7 @@ extern YYSTYPE yylval;
 
 void yyerror(char *s) {
 	printf("\n\nFoi encontrado um erro proximo a linha: %d\n", contLinhas);
+	exit(1);
 }
 
 int main(void) {

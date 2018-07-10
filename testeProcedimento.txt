@@ -1,0 +1,7 @@
+program
+procedure testeProcedimento(value integer : b):
+    integer : i;
+begin
+    i := 1
+end
+

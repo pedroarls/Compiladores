@@ -79,21 +79,21 @@ extern int yydebug;
     FALSO = 289,
     VERDADEIRO = 290,
     NUMERO = 291,
-    LT = 292,
-    GT = 293,
-    LE = 294,
-    GE = 295,
+    OR = 292,
+    AND = 293,
+    NOT = 294,
+    NE = 295,
     EQ = 296,
-    NE = 297,
-    DIV = 298,
-    MULT = 299,
-    SUM = 300,
-    SUB = 301,
-    OR = 302,
-    AND = 303,
-    NOT = 304,
-    UMINUS = 305,
-    EXP = 306,
+    LE = 297,
+    LT = 298,
+    GT = 299,
+    GE = 300,
+    SUM = 301,
+    SUB = 302,
+    MULT = 303,
+    DIV = 304,
+    EXP = 305,
+    UMINUS = 306,
     ELSE = 307
   };
 #endif
@@ -132,21 +132,21 @@ extern int yydebug;
 #define FALSO 289
 #define VERDADEIRO 290
 #define NUMERO 291
-#define LT 292
-#define GT 293
-#define LE 294
-#define GE 295
+#define OR 292
+#define AND 293
+#define NOT 294
+#define NE 295
 #define EQ 296
-#define NE 297
-#define DIV 298
-#define MULT 299
-#define SUM 300
-#define SUB 301
-#define OR 302
-#define AND 303
-#define NOT 304
-#define UMINUS 305
-#define EXP 306
+#define LE 297
+#define LT 298
+#define GT 299
+#define GE 300
+#define SUM 301
+#define SUB 302
+#define MULT 303
+#define DIV 304
+#define EXP 305
+#define UMINUS 306
 #define ELSE 307
 
 /* Value type.  */
@@ -154,14 +154,21 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 55 "bas.y" /* yacc.c:1909  */
+#line 54 "bas.y" /* yacc.c:1909  */
+
+		// typedef struct{
+		// 	int tipo;
+		// 	union{
+		// 		int iValue;
+		// 		char character;
+		// 	}
+		// }expressao;
 
 		int iValue;
-		int* iValueP;
 		char* sIndex;
 
 
-#line 165 "y.tab.h" /* yacc.c:1909  */
+#line 172 "y.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
