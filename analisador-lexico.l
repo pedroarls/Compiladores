@@ -24,7 +24,7 @@ caractere   \'[A-Z]\'
 %%
 
 {ws}            {ECHO;}
-{comentario}    {ECHO;}
+{comentario}    {}
 
 "begin"         {
                     ECHO;
