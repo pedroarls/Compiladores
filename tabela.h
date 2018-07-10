@@ -17,7 +17,8 @@
 
 typedef struct procedimento_str {
     char nome[MAX_NOME];
-    int parametro[MAX_PARAMETROS];
+    // char *parametro[MAX_PARAMETROS];
+	int tipo_parametro[MAX_PARAMETROS];
     int modo[MAX_PARAMETROS];
     int numero_parametros;
     int tipo_retornado;
@@ -35,7 +36,7 @@ typedef struct simbolo_str
 	char nome[MAX_NOME];
 	int tipo;
 	int valor_inteiro;
-	// int nivel;
+	int nivel;
 	// int width;	// quantidade de palavras para alocar a variavel
 	// int offset;	// deslocamento
 	// char valor_char;
@@ -43,7 +44,8 @@ typedef struct simbolo_str
 	// int local;
 	// int constante;
 	// int quad;
-	// procedimento_t procedimento;
+	procedimento_t procedimento;
+	int ehProcedimento;
 	// tipo_definido_t tipo_definido;
 } simbolo_t;
 
@@ -70,7 +72,9 @@ void Imprime_Tabela();
 simbolo_t RecuperaSimbolo(char* X);
 void setValorInt(char* X, int valor);
 int getValorInteiro(char *X);
-
+void adicionar_parametro(char* X, int modo, int tipo, char* nome_parametro);
+void imprimir_procedimentos();
+void setProcedimento(char* X);
 
 // Tabela de Simbolos
 int escopo[10];

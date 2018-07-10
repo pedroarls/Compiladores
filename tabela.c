@@ -76,8 +76,10 @@ int Recupera_Entrada(char* X)
 			return;
 		}
 	}
-
+	
 	tabela_simbolos[L] = atribut;
+	tabela_simbolos[L].ehProcedimento = 0;
+	tabela_simbolos[L].procedimento.numero_parametros = 0;
 	L++;
 }
 
@@ -96,8 +98,11 @@ void Imprime_Tabela()
 	}
 }
 
+
+/****** ********/
+
 int getValorInteiro(char *X){
-	int K;
+	int K;// X foi encontrado
 	K = L;
 	
 	while (K > escopo[nivel]) {
@@ -140,4 +145,68 @@ simbolo_t RecuperaSimbolo(char* X){
 	}
     
 	return s;
+}
+
+void setProcedimento(char* X){
+	int K; /* percorre a lista */
+	K = L;
+
+	simbolo_t s;
+
+	strcpy(s.nome,"Simbolo nao encontrado.\n");
+	s.tipo = -1;
+
+	while (K > 1)
+	{
+        K--;
+        if( !strcmp(X, tabela_simbolos[K].nome ) ) 
+			tabela_simbolos[K].ehProcedimento = 1;		
+	}
+}
+
+void adicionar_parametro(char* X, int modo, int tipo, char* nome_parametro){
+	int K; /* percorre a lista */
+	K = L;
+	int posicaoParametro;
+
+	simbolo_t s;
+
+	strcpy(s.nome,"Simbolo nao encontrado.\n");
+	s.tipo = -1;
+
+	while (K > 1)
+	{
+        K--;
+        if( !strcmp(X, tabela_simbolos[K].nome ) ) {
+	 		posicaoParametro = tabela_simbolos[K].procedimento.numero_parametros;
+			
+	// 		//coloca o nome do parametro
+			// strcpy(tabela_simbolos[K].procedimento.parametro[posicaoParametro], strdup(nome_parametro));
+			tabela_simbolos[K].procedimento.modo[posicaoParametro] = modo; //coloca o modo do parametro : value ou reference
+			tabela_simbolos[K].procedimento.tipo_parametro[posicaoParametro] = tipo; //coloca o tipo do parametro
+			tabela_simbolos[K].procedimento.numero_parametros = tabela_simbolos[K].procedimento.numero_parametros +1;
+			return;
+		}
+	}
+    
+	printf("\nSimbolo nao encontrado. Procedimento: %s\n",strdup(X));
+	return;
+}
+
+void imprimir_procedimentos(){
+	int i,j;
+	procedimento_t procedimentoAtual;
+	printf("\n\nTabela de Procedimentos:\n");
+	printf("===================\n\n");
+	printf("INDICE\t\tTIPO\t\tMODO\n");
+	printf("======\t\t====\t\t====\n");
+	for (i = 1; i < L ; i++ )
+	{
+		if(tabela_simbolos[i].ehProcedimento){
+			for(j=0; j<tabela_simbolos[i].procedimento.numero_parametros;j++){
+				procedimentoAtual = tabela_simbolos[i].procedimento;
+				printf("%d\t\t%d\t\t%d\n", j, procedimentoAtual.tipo_parametro[j],procedimentoAtual.modo[j]);
+			}
+		}
+	}
 }

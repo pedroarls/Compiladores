@@ -112,6 +112,7 @@ caractere   \'[A-Z]\'
 
 "reference"     {
                     ECHO;
+                    yylval.iValue = REFERENCE;
                     return (REFERENCE);
                 }
 
@@ -153,6 +154,7 @@ caractere   \'[A-Z]\'
 
 "value"         {
                     ECHO;
+                    yylval.iValue = VALUE;
               	    return (VALUE);
                 }
 

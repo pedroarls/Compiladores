@@ -1,7 +1,12 @@
 program
-procedure testeProcedimento(value integer : b):
-    integer : i;
-begin
-    i := 1
-end
+	integer : weight;
+    char: testando;
 
+procedure testeProc (value integer: a, value integer: b):
+begin
+    a := 10
+end;
+
+begin
+    testeProc(distance,testando)
+end
