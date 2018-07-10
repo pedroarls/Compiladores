@@ -1206,13 +1206,14 @@ YY_RULE_SETUP
 #line 254 "analisador-lexico.l"
 {
                     ECHO;
+                    yylval.const_char = yytext[1];
                     return (CONST_CHAR);
 
                 }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 260 "analisador-lexico.l"
+#line 261 "analisador-lexico.l"
 {
                     ECHO;
 			        return DOISPONTOS;
@@ -1220,7 +1221,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 265 "analisador-lexico.l"
+#line 266 "analisador-lexico.l"
 {
                     ECHO;
 			        return VIRGULA;
@@ -1228,7 +1229,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 270 "analisador-lexico.l"
+#line 271 "analisador-lexico.l"
 {
                     ECHO;
 			        return PONTOVIRGULA;
@@ -1236,7 +1237,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 275 "analisador-lexico.l"
+#line 276 "analisador-lexico.l"
 {
                     ECHO;
 			        return APARENTESE;
@@ -1244,7 +1245,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 280 "analisador-lexico.l"
+#line 281 "analisador-lexico.l"
 {
                     ECHO;
 			        return FPARENTESE;
@@ -1253,7 +1254,7 @@ YY_RULE_SETUP
 case 51:
 /* rule 51 can match eol */
 YY_RULE_SETUP
-#line 285 "analisador-lexico.l"
+#line 286 "analisador-lexico.l"
 {
                     ECHO;
     			    contLinhas++;
@@ -1262,7 +1263,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 291 "analisador-lexico.l"
+#line 292 "analisador-lexico.l"
 {
                     // ECHO;
                     printf("\nErro lexico na linha %d.\n",contLinhas);
@@ -1271,10 +1272,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 296 "analisador-lexico.l"
+#line 297 "analisador-lexico.l"
 ECHO;
 	YY_BREAK
-#line 1278 "lex.yy.c"
+#line 1279 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2275,7 +2276,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 296 "analisador-lexico.l"
+#line 297 "analisador-lexico.l"
 
 
 

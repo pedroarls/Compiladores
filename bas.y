@@ -49,20 +49,18 @@
 		getValorInteiro(X);
 	}
 
+	void verificaLimitesInteiros(int num){
+		if(num < -32768 || num>32767){
+			yyerror(" ");
+		}
+	}
+
 %}
 
 %union{
-		// typedef struct{
-		// 	int tipo;
-		// 	union{
-		// 		int iValue;
-		// 		char character;
-		// 	}
-		// }expressao;
-
 		int iValue;
 		char* sIndex;
-
+		char const_char;
 };
 
 %token BGN
@@ -246,7 +244,10 @@ comando : comando_de_atribuicao
 	| rotulo DOISPONTOS comando
 	;
 
-comando_de_atribuicao : variavel {verificaAtribuicao();} ATRIBUICAO expr {setValor(strdup($1),$4);}
+comando_de_atribuicao : variavel {verificaAtribuicao();} ATRIBUICAO expr 	{
+																				verificaLimitesInteiros($4);
+																				setValor(strdup($1),$4);
+																			}
 					;
 
 comando_while : WHILE M0 expr DO M0 lista_de_comandos ENDWHILE
@@ -317,6 +318,7 @@ constante : int_ou_char {}
 
 int_ou_char : inteiro	{
 							$$ = $1;
+							
 						}
 		| CONST_CHAR {}
 		;

@@ -253,6 +253,7 @@ caractere   \'[A-Z]\'
 
 {caractere}     {
                     ECHO;
+                    yylval.const_char = yytext[1];
                     return (CONST_CHAR);
 
                 }

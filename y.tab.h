@@ -154,21 +154,13 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 54 "bas.y" /* yacc.c:1909  */
-
-		// typedef struct{
-		// 	int tipo;
-		// 	union{
-		// 		int iValue;
-		// 		char character;
-		// 	}
-		// }expressao;
+#line 60 "bas.y" /* yacc.c:1909  */
 
 		int iValue;
 		char* sIndex;
+		char const_char;
 
-
-#line 172 "y.tab.h" /* yacc.c:1909  */
+#line 164 "y.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
