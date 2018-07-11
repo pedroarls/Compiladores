@@ -50,7 +50,6 @@
 		}
 		
 
-
 		if(ehChamadaProcedimento){
 			contParametros = contParametros + 1;
 		}
@@ -79,20 +78,13 @@
 		setValorInt(strdup(X), valor);
 	}
 
-	void iniciaBloco(){
-		Entrada_Bloco();
-	}
-
-	void finalizaBloco(){
-		Saida_Bloco();
-	}
-
 	void verificaAtribuicao(){
 		simbolo_t simbolo;
 
 		simbolo = RecuperaSimbolo(identificadorAtual);
 
 		if(simbolo.tipo == PROCEDURE){
+			printf("\n\nImpossivel realizar atribuicao a procedimento.\n\n");
 			yyerror(" ");
 		}
 	}
@@ -103,24 +95,26 @@
 
 	void verificaLimitesInteiros(int num){
 		if(num < -32768 || num>32767){
+			printf("\n\nInteiro fora da faixa permitida.\n\n");
 			yyerror(" ");
 		}
 	}
 
 	void verificaLimites(){
 		if(limiteInferior < 0){
+			printf("\n\nErro no limite inferior.\n\n");
 			yyerror(" ");
 		}
 
 		if(limiteSuperior < 0){
+			printf("\n\nErro no limite superior.\n\n");
 			yyerror(" ");
 		}
-
 
 		if(limiteSuperior<limiteInferior){
+			printf("\n\nErro nos limites. Limite superior deve ser maior ou igual ao inferior \n\n");
 			yyerror(" ");
 		}
-
 
 	}
 
@@ -206,13 +200,13 @@
 partida: program
 ;
 
-program : PROGRAM M2 declaracoes M0 bloco
+program : PROGRAM M2 declaracoes{decVar=1;} M0 bloco
 ;
 
 bloco   : BGN{} lista_de_comandos M0 END{}
 ;
 
-declaracoes : declaracoes M0 declaracao PONTOVIRGULA {decVar=1;} 
+declaracoes : declaracoes M0 declaracao PONTOVIRGULA
 		| vazio
 ;
 
@@ -317,11 +311,11 @@ comando : comando_de_atribuicao
 	| rotulo DOISPONTOS comando
 ;
 
-comando_de_atribuicao : variavel {verificaAtribuicao();} ATRIBUICAO expr 	{
-																				verificaLimitesInteiros($4);
-																				setValor(strdup($1),$4);
-																			}
-;
+	comando_de_atribuicao : variavel {verificaAtribuicao();} ATRIBUICAO expr 	{
+																					verificaLimitesInteiros($4);
+																					setValor(strdup($1),$4);
+																				}
+	;
 
 comando_while : WHILE M0 expr DO M0 lista_de_comandos ENDWHILE
 ;
@@ -422,7 +416,6 @@ extern YYSTYPE yylval;
 void yyerror(char *s) {
 	printf("\n\nFoi encontrado um erro proximo a linha: %d\n", contLinhas);
 	Imprime_Tabela();
-	imprimir_procedimentos();
 	exit(1);
 }
 

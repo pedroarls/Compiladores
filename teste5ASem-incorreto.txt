@@ -1,0 +1,12 @@
+program
+	integer : distance;
+    integer: testando;
+
+procedure testeProc (value integer: a, value integer: b):
+begin
+    a := 10
+end;
+
+begin
+    testeProc(distance)
+end

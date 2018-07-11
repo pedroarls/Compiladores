@@ -1,5 +1,5 @@
 program
-	integer : weight;
+	integer : distance;
     char: testando;
 
 procedure testeProc (value integer: a, value integer: b):

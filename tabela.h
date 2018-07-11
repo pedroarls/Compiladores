@@ -16,12 +16,12 @@
 #define TAB_SIZE 100		/* tamanho da tabela de simbolos */
 
 typedef struct procedimento_str {
-    char nome[MAX_NOME];
-    // char *parametro[MAX_PARAMETROS];
+    // char nome[MAX_NOME];
+    // intparametro[MAX_PARAMETROS];
 	int tipo_parametro[MAX_PARAMETROS];
-    int modo[MAX_PARAMETROS];
+    // int modo[MAX_PARAMETROS];
     int numero_parametros;
-    int tipo_retornado;
+    // int tipo_retornado;
 } procedimento_t;
 
 typedef struct tipo_definido_str {

@@ -182,7 +182,6 @@ void adicionar_parametro(char* X, int modo, int tipo, char* nome_parametro){
 			
 	// 		//coloca o nome do parametro
 			// strcpy(tabela_simbolos[K].procedimento.parametro[posicaoParametro], strdup(nome_parametro));
-			tabela_simbolos[K].procedimento.modo[posicaoParametro] = modo; //coloca o modo do parametro : value ou reference
 			tabela_simbolos[K].procedimento.tipo_parametro[posicaoParametro] = tipo; //coloca o tipo do parametro
 			tabela_simbolos[K].procedimento.numero_parametros = tabela_simbolos[K].procedimento.numero_parametros +1;
 			return;
@@ -198,14 +197,14 @@ void imprimir_procedimentos(){
 	procedimento_t procedimentoAtual;
 	printf("\n\nTabela de Procedimentos:\n");
 	printf("===================\n\n");
-	printf("INDICE\t\tTIPO\t\tMODO\n");
-	printf("======\t\t====\t\t====\n");
+	printf("INDICE\t\tTIPO\n");
+	printf("======\t\t====\n");
 	for (i = 1; i < L ; i++ )
 	{
 		if(tabela_simbolos[i].ehProcedimento){
 			for(j=0; j<tabela_simbolos[i].procedimento.numero_parametros;j++){
 				procedimentoAtual = tabela_simbolos[i].procedimento;
-				printf("%d\t\t%d\t\t%d\n", j, procedimentoAtual.tipo_parametro[j],procedimentoAtual.modo[j]);
+				printf("%d\t\t%d\n", j, procedimentoAtual.tipo_parametro[j]);
 			}
 		}
 	}
